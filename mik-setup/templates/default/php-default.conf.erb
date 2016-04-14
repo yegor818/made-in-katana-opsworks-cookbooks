@@ -1,0 +1,18 @@
+[default]
+
+listen = /tmp/php-fpm.default.sock
+
+user = <%= node[:setup][:php][:user_name] %>
+group = <%= node[:setup][:php][:group_name] %>
+
+pm = dynamic
+pm.max_children = 10
+pm.start_servers = 2
+pm.min_spare_servers = 2
+pm.max_spare_servers = 4
+pm.max_requests = 100
+
+php_flag[display_errors] = off
+php_admin_flag[log_errors] = on
+php_admin_value[error_log] = /var/log/php-fpm/php-error_log
+php_admin_value[memory_limit] = 32M
